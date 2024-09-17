@@ -63,7 +63,7 @@ This will decrypt the file and save the output with the `.dec` extension, e.g., 
 
 ### Key Derivation
 
-*cryptoooor* uses the [Scrypt](https://docs.rs/scrypt/latest/scrypt/) algorithm for key derivation. It generates a key using a password that is hashed with a salt, ensuring that each key is unique for a given password-salt pair.
+*cryptoooor* uses the [Scrypt](https://en.wikipedia.org/wiki/Scrypt) algorithm for key derivation. It generates a key using a password that is hashed with a salt, ensuring that each key is unique for a given password-salt pair.
 
 ### Encryption
 
@@ -78,6 +78,7 @@ The nonce and key are used to decrypt the file and recover the original contents
 - [ ] **Improved Security Features**: Enhancing the encryption algorithm and key management for better security.
 - [ ] **User-Friendly Enhancements**: Adding a progress bar to provide visual feedback during encryption and decryption processes.
 - [ ] **Extended File Support**: Implementing support for additional file formats and larger files.
+- [ ] **Web app**: Make cryptoooor available on the web.
 
 ## Contributing
 
