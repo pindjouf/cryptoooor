@@ -1,6 +1,16 @@
 # cryptoooor
 
-<a href="https://ko-fi.com/pindjouf" class="kofi-button" target="_blank">Support me on Ko-fi</a>
+<a href="https://ko-fi.com/pindjouf" class="kofi-button" target="_blank" style="display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: var(--hr);
+    color: var(--text);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+">Support me on Ko-fi</a>
 
 > [!WARNING]
 > This is a very rough MVP, a new release with more security and ease of use is in the works
