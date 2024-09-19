@@ -1,5 +1,9 @@
 # cryptoooor
-
+<div class="flex flex-row items-center gap-2 text-xs">
+    <p class="text-center font-mono font-medium">made by </p>
+    <img class="rounded-full ring-2 ring-white" width="30" height="30" src="https://pbs.twimg.com/profile_images/1579858845635166210/32og_CH__400x400.jpg" alt="pindjouf pfp">
+</div>
+ 
 > [!WARNING]
 > This is a very rough MVP, a new release with more security and ease of use is in the works
 
@@ -78,7 +82,7 @@ The nonce and key are used to decrypt the file and recover the original contents
 - [ ] **Improved Security Features**: Enhancing the encryption algorithm and key management for better security.
 - [ ] **User-Friendly Enhancements**: Adding a progress bar to provide visual feedback during encryption and decryption processes.
 - [ ] **Extended File Support**: Implementing support for additional file formats and larger files.
-- [ ] **Web app**: Make cryptoooor available on the web.
+- [x] **Web app**: Make cryptoooor available on the web.
 
 ## Contributing
 
