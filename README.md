@@ -1,9 +1,7 @@
 # cryptoooor
-<div class="flex flex-row items-center gap-2 text-xs">
-    <p class="text-center font-mono font-medium">made by </p>
-    <img class="rounded-full ring-2 ring-white" width="30" height="30" src="https://pbs.twimg.com/profile_images/1579858845635166210/32og_CH__400x400.jpg" alt="pindjouf pfp">
-</div>
- 
+
+<a href="https://ko-fi.com/pindjouf" class="kofi-button" target="_blank">Support me on Ko-fi</a>
+
 > [!WARNING]
 > This is a very rough MVP, a new release with more security and ease of use is in the works
 
