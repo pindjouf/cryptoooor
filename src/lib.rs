@@ -3,6 +3,7 @@ use aes_gcm::{
     Aes256Gcm, Nonce, Key
 };
 use typenum;
+use std::path::PathBuf;
 use rprompt;
 use std::fs;
 use scrypt::{
@@ -13,6 +14,15 @@ use scrypt::{
     Scrypt,
     Params
 };
+use serde::Deserialize;
+use config::{Config, File};
+
+#[derive(Debug, Deserialize)]
+pub struct CryptoooorConfig {
+    key: Option<String>,
+    hash: Option<String>,
+    salt: Option<String>,
+}
 
 pub fn encrypt(content: Vec<u8>, key: &Key<Aes256Gcm>) -> Result<(Vec<u8>, Nonce<typenum::U12>), Box<dyn std::error::Error>> {
     let cipher = Aes256Gcm::new(key);
@@ -61,8 +71,43 @@ pub fn generate_hash_and_salt() -> Result<(), Box<dyn std::error::Error>> {
 
     let password_hash = Scrypt.hash_password(password, &salt)?;
 
-    fs::write("hash.txt", password_hash.to_string())?;
-    fs::write("salt.txt", salt.to_string())?;
+    Ok((password_hash, salt))
+}
 
-    Ok(())
+pub fn get_config_path() -> PathBuf {
+    dirs::config_dir()
+    .expect()
+    .join("cryptoooor")
+    .join("cryptoooor.toml");
+}
+
+pub fn load_config() -> Result<CryptoooorConfig, Box<dyn std::error::Error>> {
+    let config_path = get_config_path();
+
+    if !config_path.exists {
+        println!("Config file not found. Please create one.");
+    }
+
+    let settings = config::builder()
+        .add_source(File::from(config_path))
+        .build()?;
+
+    let config: CryptoooorConfig = settings.try_deserialize()?;
+    Ok(config)
+}
+
+pub fn generate_and_save_config() -> CryptooorConfig {
+    let (hash, salt) = generate_hash_and_salt();
+
+    let config = CryptooorConfig {
+        key: None,  // Will be None if user hasn't provided one
+        hash: Some(hash.clone()),
+        salt: Some(salt.clone()),
+    };
+
+    let config_path = get_config_path();
+    let toml_string = toml::to_string(&config).unwrap();
+    fs::write(config_path, toml_string).expect("Failed to write config file");
+
+    config
 }

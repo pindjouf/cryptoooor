@@ -1,4 +1,5 @@
 use cryptoooor::*;
+use config::*;
 use patharg::InputArg;
 use clap::Parser;
 use std::fs;
@@ -20,22 +21,10 @@ struct Args {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
     let bar = ProgressBar::new(100);
+    let config_path = get_config_path().expect("Couldn't find your config");
+    let config = load_config().expect("Couldn't load your config");
 
-
-    let (hash, salt) = match (fs::read("hash.txt"), fs::read("salt.txt")) {
-        (Ok(hash), Ok(salt)) => {
-            (hash, salt)
-        }
-        _ => {
-            println!("Couldn't find your hash and salt, let's make new ones!");
-            generate_hash_and_salt()?;
-
-            // reread the files after making em
-            (fs::read("hash.txt")?, fs::read("salt.txt")?)
-        }
-    };
-    
-    let key = derive_key(hash, salt)?;
+    let key = if config.key { config.key } else { derive_key(config.hash, config.salt) };
 
     let file_path = args.file.to_string();
 
