@@ -95,19 +95,3 @@ pub fn load_config() -> Result<CryptoooorConfig, Box<dyn std::error::Error>> {
     let config: CryptoooorConfig = settings.try_deserialize()?;
     Ok(config)
 }
-
-pub fn generate_and_save_config() -> CryptooorConfig {
-    let (hash, salt) = generate_hash_and_salt();
-
-    let config = CryptooorConfig {
-        key: None,  // Will be None if user hasn't provided one
-        hash: Some(hash.clone()),
-        salt: Some(salt.clone()),
-    };
-
-    let config_path = get_config_path();
-    let toml_string = toml::to_string(&config).unwrap();
-    fs::write(config_path, toml_string).expect("Failed to write config file");
-
-    config
-}
